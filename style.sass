@@ -30,10 +30,19 @@ ul
     margin: 0
     padding: 0
 
+a 
+    text-decoration: none
+    color: #000
+    transition: all 0.4s
+    &:hover 
+        color: $ascentHoverColor
+        transition: all 0.4s
+
 button
     border-radius: 5px
     border: none
-    background-color: $ascentColor    
+    background-color: $ascentColor
+    cursor: pointer    
     transition: all 0.4s
     &:hover
         background-color: $ascentHoverColor
@@ -110,6 +119,7 @@ button
 
 .events-list__element__text 
     padding: 0px 20px
+    +baseText
 
 .container__header__notify-button 
     width: 16%
