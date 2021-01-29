@@ -1,0 +1,24 @@
+{
+  "name": "event-js",
+  "version": "1.0.0",
+  "description": "the list of actual frontend conferences",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "conference"
+  ],
+  "author": "Anastasiia Zibrova <zianastasia@yandex.ru>",
+  "license": "MIT"
+}
