@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS conferences</title>
+    <title>JavaScript conferences</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/index.js"></script>
+    <script src="./src/index.js" defer></script>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <section class="container__header">
+            <h1 class="container__header__heading">The list of nearest JavaScript conferences</h1>
+            <button class="container__header__subscription-button">Notify me of upcoming events</button>
+        </section>
+        <div class="events-list">
+            <section class="events-list__header">
+                <h2 class="events-list__header__heading">Start date</h2>
+                <h2 class="events-list__header__heading">Name</h2>
+                <h2 class="events-list__header__heading">Status</h2>
+            </section>
+            <ul class="events-list__wrapper">
+                
+            </ul>
+        </div>
+    </div>
     
 </body>
 </html>
