@@ -121,14 +121,14 @@ const initializeEventListeners = () => {
                 eventsListWrapper.textContent = '';
                 renderEvents(eventsData);
 
-                createNotification(`You have stopped tracking ${elementName}.`);
+                createNotification(`You have stopped tracking ${elementName}.`, elementName);
             } else {
                 localStorage.setItem(elementName, elementStartDate);
                 eventsListWrapper.textContent = '';
                 renderEvents(eventsData);
 
                 createNotification(`You have subscribed to ${elementName} notifications. 
-                It will start on ${elementStartDate}.`);
+                It will start on ${elementStartDate}.`, elementName);
             }
         }
 
