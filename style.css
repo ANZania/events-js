@@ -137,4 +137,8 @@ button:disabled {
   font-size: 18px;
 }
 
+.notify-button-disabled {
+  background-color: #E2D0A0;
+}
+
 /*# sourceMappingURL=style.css.map */
