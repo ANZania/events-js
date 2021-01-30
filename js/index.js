@@ -10,9 +10,9 @@ const isFinished = date => {
     const eventDate = new Date(date);
 
     if (eventDate < currentDate) {
-        return 'finished'
+        return 'Finished'
     } else {
-        return 'upcoming'
+        return 'Upcoming'
     }
 }
 
@@ -34,8 +34,19 @@ const reduceTextShield = text => {
     return text
 }
 
+const renderNotificationButton = date => {
+    const status = isFinished(date);
+
+    if (status === 'Finished') {
+        return '<button class="container__header__notify-button" disabled >Finished</button>'
+    } else {
+        return '<button class="container__header__notify-button">Notify me!</button>'
+    }
+}
+
 const initializeRequest = async() => {
-    await fetch(requestURL).then(response => {
+    await fetch(requestURL)
+    .then(response => {
         return response.json()
     })
     .then(promise => {
@@ -49,10 +60,10 @@ const renderEvents = (eventsData) => {
         <li class="events-list__element">
             <section class="events-list__element__wrapper">
                 <p class="events-list__element__text">${element.startDate}</p>
-                <a href="${element.url}"><p class="events-list__element__text">${reduceTextShield(element.name)}</p></a>
+                <a href="${element.url}" target="blank"><p class="events-list__element__text">${reduceTextShield(element.name)}</p></a>
                 <p class="events-list__element__text">${isFinished(element.endDate)}</p>
             </section>
-            <button class="container__header__notify-button">Notify me!</button>
+            ${renderNotificationButton(element.endDate)}
         </li>
         `)
     })
