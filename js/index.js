@@ -127,8 +127,7 @@ const initializeEventListeners = () => {
                 eventsListWrapper.textContent = '';
                 renderEvents(eventsData);
 
-                createNotification(`You have subscribed to ${elementName} notifications. 
-                It will start on ${elementStartDate}.`, elementName);
+                createNotification(`You have subscribed to ${elementName} notifications. It will start on ${elementStartDate}.`, elementName);
             }
         }
 
