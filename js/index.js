@@ -16,6 +16,29 @@ const isFinished = date => {
     }
 }
 
+const initializeNotification = (body, name) => {
+    return (new Notification('The notification from the calendar', {
+        body: body,
+        icon: 'https://img2.freepng.ru/20180415/rse/kisspng-computer-icons-vector-avatar-friends-5ad3420d608ec0.3997693115237944453955.jpg'
+    }))
+}
+
+const createNotification = (body, name = '') => {
+    if (!('Notification' in window)) {
+        alert('Your browser is not supporting HTML Notifications, it needs to be updated.');
+    } else if (Notification.permission === "granted") {
+        initializeNotification(body, name)
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                initializeNotification(body, name)
+            } else {
+                alert('You have banned the display of notifications');
+            }
+        });
+    }
+}
+
 const reduceTextShield = text => {
     const regExp = /[&<>"\/]/g;
 
