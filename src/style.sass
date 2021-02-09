@@ -1,0 +1,131 @@
+$backgroundColor: #E2E2E2
+$baseColor: #F6F6F6
+$ascentColor: #FFDA15
+$ascentHoverColor: #FFB800
+$ascentDisabledColor: #E2D0A0
+    
+@mixin h1Text
+    font-family: Montserrat, sans-serif
+    font-weight: 900
+    font-size: 38px
+
+@mixin h2Text 
+    font-family: Montserrat, sans-serif
+    font-weight: 400
+    font-size: 24px
+
+@mixin baseText 
+    font-family: Roboto, sans-serif
+    font-weight: 400
+    font-size: 18px
+    
+body 
+    box-sizing: border-box
+    background-color: $backgroundColor
+    display: flex
+    justify-content: center
+
+ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+a 
+    text-decoration: none
+    color: #000
+    transition: all 0.4s
+    &:hover 
+        color: $ascentHoverColor
+        transition: all 0.4s
+
+button
+    border-radius: 5px
+    border: none
+    background-color: $ascentColor
+    cursor: pointer    
+    transition: all 0.4s
+    &:hover
+        background-color: $ascentHoverColor
+        transition: all 0.4s
+    &:focus
+        outline: none
+        transition: all 0.4s
+    &:active
+        background-color: $ascentColor
+        outline: none
+        transition: all 0.4s
+    &:disabled
+        background-color: $ascentDisabledColor
+        transition: all 0.4s
+
+.container
+    width: 1000px
+    padding-top: 5vh
+
+.container__header 
+    width: 100%
+    height: 168px
+    padding-bottom: 40px
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: space-between
+
+.container__header__heading
+    width: 80%
+    margin-block-start: 0
+    margin-block-end: 0
+    +h1Text
+
+.container__header__subscription-button
+    width: 320px
+    height: 50px
+    +baseText
+
+.events-list 
+    width: 100%
+
+.events-list__header 
+    width: 80%
+    padding-top: 30px
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.events-list__header__heading
+    padding: 0 20px
+    margin: 0
+    +h2Text
+
+.events-list__wrapper
+    width: 100%
+
+.events-list__element
+    width: 100%
+    height: 70px
+    margin: 15px 0
+    background-color: $baseColor
+    border-radius: 5px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.events-list__element__wrapper
+    width: 80%
+    height: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.events-list__element__text 
+    padding: 0 20px
+    +baseText
+
+.container__header__notify-button 
+    width: 16%
+    height: 100%
+    border-radius: 0 5px 5px 0
+    +baseText
+
+.notify-button-disabled
+    background-color: $ascentDisabledColor

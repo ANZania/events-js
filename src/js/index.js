@@ -5,6 +5,23 @@ const subscriptionButton = document.querySelector('.container__header__subscript
 const requestURL = './data.json';
 let eventsData;
 
+const initializeServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./serviceWorker.js')
+            .then(() => navigator.serviceWorker.ready.then((worker) => {
+                worker.sync.register('syncdata');
+            }))
+            .catch((err) => console.log(err));
+    }
+
+    navigator.serviceWorker.addEventListener('message', event => {
+        return (new Notification('The notification from the calendar', {
+            body: event.data.body,
+            icon: event.data.icon
+        }))
+    });
+}
+
 const isFinished = date => {
     const currentDate = new Date();
     const eventDate = new Date(date);
@@ -16,22 +33,28 @@ const isFinished = date => {
     }
 }
 
-const initializeNotification = (body, name) => {
+const initializeNotification = (body, url, name) => {
+    navigator.serviceWorker.ready.then( registration => {
+        registration.active.postMessage({
+            date: localStorage.getItem(name),
+            name: name
+        });
+    });
     return (new Notification('The notification from the calendar', {
         body: body,
-        icon: 'https://img2.freepng.ru/20180415/rse/kisspng-computer-icons-vector-avatar-friends-5ad3420d608ec0.3997693115237944453955.jpg'
+        icon: './src/img/js.png'
     }))
 }
 
-const createNotification = (body, name = '') => {
+const createNotification = (body, url = '', name = '') => {
     if (!('Notification' in window)) {
         alert('Your browser is not supporting HTML Notifications, it needs to be updated.');
     } else if (Notification.permission === "granted") {
-        initializeNotification(body, name)
+        initializeNotification(body, url, name)
     } else if (Notification.permission !== 'denied') {
         Notification.requestPermission(function (permission) {
             if (permission === "granted") {
-                initializeNotification(body, name)
+                initializeNotification(body, url, name)
             } else {
                 alert('You have banned the display of notifications');
             }
@@ -92,7 +115,6 @@ const checkIfAllTracked = (data) => {
         }
     })
 
-    console.log(counter);
     if (length === counter) {
         localStorage.setItem('isTrackingAll', 'true');
     }
@@ -137,6 +159,7 @@ const initializeEventListeners = () => {
             const element = target.closest('.events-list__element');
             const elementStartDate = element.querySelectorAll('.events-list__element__text')[0].textContent;
             const elementName = element.querySelectorAll('.events-list__element__text')[1].textContent;
+            const elementURL = element.querySelectorAll('.events-list__element__text')[1].href;
 
             if (localStorage.getItem(elementName)) {
                 localStorage.removeItem(elementName);
@@ -144,13 +167,13 @@ const initializeEventListeners = () => {
                 eventsListWrapper.textContent = '';
                 renderEvents(eventsData);
 
-                createNotification(`You have stopped tracking ${elementName}.`, elementName);
+                createNotification(`You have stopped tracking ${elementName}.`,elementURL, elementName);
             } else {
                 localStorage.setItem(elementName, elementStartDate);
                 eventsListWrapper.textContent = '';
                 renderEvents(eventsData);
 
-                createNotification(`You have subscribed to ${elementName} notifications. It will start on ${elementStartDate}.`, elementName);
+                createNotification(`You have subscribed to ${elementName} notifications. It will start on ${elementStartDate}.`, elementURL, elementName);
             }
         }
 
@@ -174,13 +197,12 @@ const initializeEventListeners = () => {
 
                 createNotification(`You have subscribed to all events.`);
             }
-
-
         }
-
-
     })
 }
 
-initializeRequest()
-initializeEventListeners()
+
+
+initializeServiceWorker();
+initializeRequest();
+initializeEventListeners();
